@@ -1,4 +1,4 @@
-// Modify routes/exams.js: PAULO SERRADO
+// Modify routes/exams.js: //PAULO SERRADO
 
 const express = require('express');
 const router = express.Router();
@@ -24,3 +24,24 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const examId = parseInt(req.params.id);
   const examIndex = exams.findIndex((exam) => exam.id === examId);
+  
+
+// Providing some pulling request regarding to POST //CEDRIC ALCOSEBA
+
+  if (examIndex === -1) {
+    return res.status(404).json({ message: 'Exam not found' });
+  }
+
+  exams[examIndex] = {
+    ...exams[examIndex],
+    ...req.body,
+    id: examId,
+  };
+
+  res.json(exams[examIndex]);
+});
+
+module.exports = router;
+
+
+
